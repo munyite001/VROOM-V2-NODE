@@ -1,3 +1,4 @@
+require('dotenv').config(); // Load Environment Variables
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -17,13 +18,16 @@ const app = express();
 //Connecting to Mongodb
 const db = async () => {
     try {
-        const conn = await mongoose.connect('mongodb://localhost:27017/autorizz', {
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false
         });
 
         console.log("MongoDB connected");
+
+        // List the name of the database
+        console.log("Database Name:", conn.connections[0].name);
 
     } catch (err) {
         console.log("MongoDB Error : Failed to connect");
