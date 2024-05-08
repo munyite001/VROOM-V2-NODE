@@ -8,6 +8,8 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const compression = require('compression');
 
+var GasModel = require("./models/GasModel");
+var ElectricModel = require("./models/ElectricModel");
 const electricRouter = require('./routes/electric_index');
 const gasRouter = require('./routes/gas_index');
 const adminRouter = require('./routes/admin');
@@ -65,8 +67,19 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/home', function (req, res) {
-    res.sendFile(__dirname + "/routes/home.html");
+app.get('/home', async function (req, res) {
+    try {
+        const electric_models = await ElectricModel.find();
+        const gas_models = await GasModel.find();
+        res.render('home', {
+            electrics: electric_models,
+            gas_cars: gas_models,
+            stylesheeturl: '/css/home.css'
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
 });
 
 app.use('/admin', adminRouter);
