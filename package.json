@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "engines": {
-    "node": "21.16.2"
+    "node": ">=18.18.0"
   },
   "dependencies": {
     "compression": "^1.7.4",
