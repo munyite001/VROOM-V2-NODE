@@ -86,10 +86,10 @@ router.get('/service/email/:mailid', async function (req, res) {
 
 
 
-//GET Admin Index
-router.get('/admin_index', async function (req, res) {
-    res.render("admin/admin_index", { layout: false });
-});
+// //GET Admin Index
+// router.get('/admin_index', async function (req, res) {
+//     res.render("admin/admin_index", { layout: false });
+// });
 
 
 // GET Electric Cars
@@ -223,7 +223,7 @@ router.post('/uploadimage', (req, res) => {
             }
             else {
                 console.log(req.file);
-                res.redirect("/admin");
+                res.redirect("/admin/home");
             }
         }
 
